@@ -27,7 +27,7 @@ class DispatchEnum(StrEnum):
 
 class Visibility(DispatchEnum):
     open = "Open"
-    restricted = "Restricted"
+    restricted = "Private"
 
 
 class SearchTypes(DispatchEnum):
