@@ -676,7 +676,7 @@ def search_filter_sort_paginate(
     query_str: str = None,
     filter_spec: str | dict | None = None,
     page: int = 1,
-    items_per_page: int = 5,
+    items_per_page: int = 50,
     sort_by: list[str] = None,
     descending: list[bool] = None,
     current_user: DispatchUser = None,
