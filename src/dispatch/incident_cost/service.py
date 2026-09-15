@@ -113,7 +113,7 @@ def get_engagement_multiplier(participant_role: str):
         # ParticipantRoleType.observer: 0, # NOTE: set to 0. It's not used, as we don't calculate cost for participants with observer role
     }
 
-    return engagement_mappings.get(participant_role)
+    return engagement_mappings.get(participant_role, 0)
 
 
 def get_incident_review_hours(incident: Incident) -> int:
