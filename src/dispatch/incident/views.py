@@ -26,6 +26,8 @@ from dispatch.event.models import EventCreateMinimal, EventUpdate
 from dispatch.incident.enums import IncidentStatus
 from dispatch.individual.models import IndividualContactRead
 from dispatch.individual.service import get_or_create
+from dispatch.case.service import create as create_case
+from dispatch.case.models import CaseCreate
 from dispatch.models import OrganizationSlug, PrimaryKey
 from dispatch.participant.models import ParticipantUpdate
 from dispatch.project import service as project_service
@@ -177,6 +179,16 @@ def create_incident_resources(
         incident_create_resources_flow, organization_slug=organization, incident_id=incident_id
     )
 
+    # auto-create a tracking case so the case board shows the incident
+    create_case(
+        db_session=db_session,
+        case_in=CaseCreate(
+            title=f"Tracking: {current_incident.title}",
+            description=current_incident.description,
+            project=incident_in.project,
+        ),
+        current_user=current_user,
+    )
     return current_incident
 
 
