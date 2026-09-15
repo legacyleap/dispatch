@@ -92,7 +92,7 @@ This is a daily report of feedback about cases handled by you.""".replace(
 ).strip()
 
 INCIDENT_WEEKLY_REPORT_TITLE = """
-Incidents Weekly Report""".replace(
+Incidents Weekly Report (Report)""".replace(
     "\n", " "
 ).strip()
 
