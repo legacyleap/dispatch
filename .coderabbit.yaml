@@ -1,0 +1,15 @@
+reviews:
+  profile: assertive
+  request_changes_workflow: false
+  high_level_summary: true
+  path_instructions:
+    - path: "**"
+      instructions: |
+        Apply the rules in ARCHITECTURE.md. Flag any change that breaks a rule,
+        any change whose consequences reach beyond the changed files, and any change
+        that does more than the linked issue asks.
+knowledge_base:
+  code_guidelines:
+    enabled: true
+    filePatterns:
+      - "ARCHITECTURE.md"
