@@ -83,7 +83,7 @@ else:
     from starlette.datastructures import Secret
 
 
-LOG_LEVEL = config("LOG_LEVEL", default=logging.WARNING)
+LOG_LEVEL = config("LOG_LEVEL", default=logging.DEBUG)
 ENV = config("ENV", default="local")
 
 ENV_TAG_LIST = config("ENV_TAGS", cast=CommaSeparatedStrings, default="")
