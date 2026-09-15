@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "rules": [
+    {"id": "DDD-012", "status": "rejected", "note": "Dispatch does not use domain/application/infrastructure layers."},
+    {"id": "DDD-013", "status": "rejected", "note": "Dispatch does not use domain/application/infrastructure layers."},
+    {"id": "DDD-010", "status": "rejected", "note": "Dispatch domains import each other's models and flows by design; the boundary is views→service, see VIEW-001."},
+    {"id": "SHARED-KERNEL", "status": "rejected"},
+    {"id": "DDD-033", "status": "rejected"}, {"id": "DDD-034", "status": "rejected"},
+    {"id": "ADS-010", "status": "rejected"}, {"id": "ADS-015", "status": "rejected"},
+    {"id": "TBD-012", "status": "rejected"}, {"id": "TBD-022", "status": "rejected"},
+    {
+      "id": "VIEW-001",
+      "title": "A views.py never imports another domain's service",
+      "statement": "HTTP endpoints call their own domain's flows/service; cross-domain work goes through flows.py (ARCHITECTURE.md rule 1).",
+      "kind": "forbidden_import",
+      "params": {"from": {"layer": "views"}, "to": {"layer": "service"}, "cross_context": true},
+      "status": "confirmed", "severity": "high",
+      "source": "ARCHITECTURE.md#rule-1", "proposed_by": "architect", "approved_by": "architect", "created_at": "2026-09-15T00:00:00Z"
+    },
+    {
+      "id": "ENUM-001",
+      "title": "Enum values are persisted: changing one needs a data migration",
+      "statement": "DispatchEnum values are stored as strings in PostgreSQL and referenced by the UI and the Slack plugin; a change ships with an Alembic revision (ARCHITECTURE.md rule 2).",
+      "kind": "paired_change",
+      "params": {"when_globs": ["src/dispatch/enums.py", "src/dispatch/*/enums.py"],
+                 "requires_globs": ["src/dispatch/database/revisions/**"],
+                 "requires_label": "an Alembic revision under database/revisions/",
+                 "fix": "Add an Alembic data migration that rewrites the stored values, and update the Vue UI and Slack plugin comparisons in the same PR."},
+      "status": "confirmed", "severity": "high",
+      "source": "ARCHITECTURE.md#rule-2", "proposed_by": "architect", "approved_by": "architect", "created_at": "2026-09-15T00:00:00Z"
+    },
+    {
+      "id": "MODEL-001",
+      "title": "Model changes ship with a migration",
+      "statement": "Adding, removing or renaming a Column requires an Alembic revision in the same PR (ARCHITECTURE.md rule 3).",
+      "kind": "paired_change",
+      "params": {"when_globs": ["src/dispatch/*/models.py"], "except_globs": [],
+                 "requires_globs": ["src/dispatch/database/revisions/**"],
+                 "requires_label": "an Alembic revision under database/revisions/"},
+      "status": "confirmed", "severity": "high",
+      "source": "ARCHITECTURE.md#rule-3", "proposed_by": "architect", "approved_by": "architect", "created_at": "2026-09-15T00:00:00Z"
+    },
+    {
+      "id": "SEC-001",
+      "title": "Permissions and configuration are a security surface",
+      "statement": "Changes to dispatch/auth/permissions.py or dispatch/config.py need a ticket that names them (ARCHITECTURE.md rule 5).",
+      "kind": "sensitive_path",
+      "params": {"paths": ["src/dispatch/auth/permissions.py", "src/dispatch/config.py"], "why": "security surface (ARCHITECTURE.md rule 5)"},
+      "status": "confirmed", "severity": "high",
+      "source": "ARCHITECTURE.md#rule-5", "proposed_by": "architect", "approved_by": "architect", "created_at": "2026-09-15T00:00:00Z"
+    },
+    {
+      "id": "COST-001",
+      "title": "Cost multipliers are policy, not bugs",
+      "statement": "incident_cost/service.py role multipliers reflect a documented policy; changing who counts toward cost is a product decision (ARCHITECTURE.md rule 6).",
+      "kind": "manual", "params": {},
+      "status": "confirmed", "severity": "medium",
+      "source": "ARCHITECTURE.md#rule-6", "proposed_by": "architect", "approved_by": "architect", "created_at": "2026-09-15T00:00:00Z"
+    }
+  ]
+}

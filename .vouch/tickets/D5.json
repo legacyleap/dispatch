@@ -1,0 +1,10 @@
+{
+  "key": "D5",
+  "type": "bug",
+  "summary": "get_engagement_multiplier crashes on unknown role",
+  "scope": {
+    "paths": [
+      "src/dispatch/incident_cost/**"
+    ]
+  }
+}

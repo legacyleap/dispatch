@@ -1,0 +1,10 @@
+{
+  "key": "D3",
+  "type": "story",
+  "summary": "Auto-create a case for every new incident",
+  "scope": {
+    "paths": [
+      "src/dispatch/incident/**"
+    ]
+  }
+}

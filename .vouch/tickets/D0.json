@@ -1,0 +1,10 @@
+{
+  "key": "D0",
+  "type": "docs",
+  "summary": "Docstring wording in get_engagement_multiplier",
+  "scope": {
+    "paths": [
+      "src/dispatch/incident_cost/**"
+    ]
+  }
+}

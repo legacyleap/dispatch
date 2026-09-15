@@ -1,0 +1,10 @@
+{
+  "key": "D2",
+  "type": "story",
+  "summary": "Rename Restricted visibility to Private",
+  "scope": {
+    "paths": [
+      "src/dispatch/enums.py"
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "key": "D4",
+  "type": "story",
+  "summary": "Lists feel slow with 5 items per page",
+  "scope": {
+    "paths": [
+      "src/dispatch/database/**"
+    ]
+  }
+}
