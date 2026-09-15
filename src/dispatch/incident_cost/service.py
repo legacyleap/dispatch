@@ -103,7 +103,7 @@ def delete(*, db_session: Session, incident_cost_id: int):
 
 
 def get_engagement_multiplier(participant_role: str):
-    """Returns an engagement multiplier for a given incident role."""
+    """Return the engagement multiplier for a given incident role."""
     engagement_mappings = {
         ParticipantRoleType.incident_commander: 1,
         ParticipantRoleType.scribe: 0.75,
